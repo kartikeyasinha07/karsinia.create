@@ -1,0 +1,816 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,interactive-widget=resizes-content">
+<meta name="theme-color" content="#08090d">
+<title>Karsinia.Create</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+<style>
+:root{--bg:#08090d;--panel:#0e1016;--text:#f3f0f5;--muted:#9895a0;--faint:#66636d;--border:rgba(255,255,255,.08);--accent:#ff6b5f;--blue:#6c84ff;--cream:#f1ede6;--green:#7bd3a0;--sidebar:248px}*{box-sizing:border-box}html{background:var(--bg);-webkit-text-size-adjust:100%}body{margin:0;min-height:100dvh;font-family:"DM Sans",system-ui,sans-serif;color:var(--text);background:radial-gradient(circle at 8% 0%,rgba(255,107,95,.12),transparent 31%),radial-gradient(circle at 96% 5%,rgba(108,132,255,.15),transparent 34%),linear-gradient(145deg,#08090d,#0a0b11 55%,#090a0e);-webkit-font-smoothing:antialiased}button,input,select{font:inherit}.app{display:grid;grid-template-columns:var(--sidebar) minmax(0,1fr);min-height:100dvh}.sidebar{position:sticky;top:0;height:100dvh;padding:18px 13px;border-right:1px solid var(--border);background:rgba(8,9,13,.68);backdrop-filter:blur(22px);overflow:auto}.brand{padding:6px 11px 19px}.brand-main{display:flex;align-items:baseline}.k{font-size:29px;font-weight:700;letter-spacing:-.08em;transform:skewX(-7deg);text-shadow:-5px 0 20px rgba(255,107,95,.3),5px 0 20px rgba(108,132,255,.3)}.rest,.create{font-size:23px;font-weight:600;letter-spacing:-.05em}.dot{color:#716e78}.create{font-weight:500}.brand-sub{font-size:8px;color:#706d77;text-transform:uppercase;letter-spacing:.16em;margin-top:5px}.nav-group{margin:14px 0}.nav-label{padding:0 10px 6px;font-size:8px;color:#5d5a64;text-transform:uppercase;letter-spacing:.17em}.nav-item{width:100%;border:0;background:transparent;color:#aaa7b1;display:flex;align-items:center;gap:9px;padding:10px;border-radius:10px;font-size:10px;text-align:left}.nav-item:hover{background:rgba(255,255,255,.035);color:#fff}.nav-item.active{color:#fff;background:linear-gradient(90deg,rgba(255,107,95,.08),rgba(108,132,255,.06));border:1px solid rgba(255,255,255,.055)}.nav-icon{width:17px;text-align:center;color:#85828d}.main{min-width:0;padding:22px clamp(18px,2.3vw,34px) 70px}.content{max-width:1500px;margin:auto}.topbar{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:18px}.page-kicker{font-size:8px;color:#6b6872;text-transform:uppercase;letter-spacing:.16em}.page-title{font-size:24px;font-weight:600;letter-spacing:-.045em;margin-top:2px}.top-actions{display:flex;gap:8px;align-items:center}.searchbox{min-width:290px;height:42px;border:1px solid var(--border);border-radius:12px;background:rgba(10,11,16,.52);display:flex;align-items:center;gap:9px;padding:0 12px;color:#9995a0;font-size:11px}.searchbox kbd{margin-left:auto;border:1px solid rgba(255,255,255,.08);border-radius:6px;padding:3px 6px;color:#68656f;font-size:8px}.primary,.ghost,.mini,.danger{border-radius:10px;border:1px solid var(--border);min-height:39px;padding:0 13px;font-size:10px;font-weight:600;cursor:pointer}.primary{background:var(--cream);color:#111218;border-color:transparent}.ghost,.mini{background:rgba(255,255,255,.03);color:#d0ccd5}.mini{min-height:33px;padding:0 10px}.danger{background:rgba(255,107,116,.055);color:#ff9ca5;border-color:rgba(255,107,116,.16)}.hero{border:1px solid var(--border);border-radius:22px;padding:31px;background:linear-gradient(115deg,rgba(255,255,255,.025),transparent 26%),radial-gradient(circle at 8% 10%,rgba(255,107,95,.1),transparent 27%),radial-gradient(circle at 94% 88%,rgba(108,132,255,.11),transparent 31%),rgba(12,13,19,.62);margin-bottom:26px}.eyebrow{font-size:9px;text-transform:uppercase;letter-spacing:.18em;color:#a9a5af;display:flex;align-items:center;gap:8px}.eyebrow:before{content:"";width:22px;height:1px;background:linear-gradient(90deg,var(--accent),var(--blue))}.hero h2{font-size:clamp(34px,4.5vw,55px);letter-spacing:-.06em;line-height:.98;margin:13px 0}.hero p{font-size:13px;color:#aaa7b1;line-height:1.65;max-width:800px}.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:20px}.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:24px}.stat{border-top:1px solid rgba(255,255,255,.07);padding-top:10px}.stat strong{display:block;font-size:22px;letter-spacing:-.045em}.stat span{font-size:8px;color:#6d6974;text-transform:uppercase;letter-spacing:.11em}.section{margin:28px 0}.section-head{display:flex;align-items:flex-end;justify-content:space-between;gap:14px;margin-bottom:11px}.section-title{font-size:11px;text-transform:uppercase;letter-spacing:.1em;font-weight:600;color:#cec9d2}.section-sub{font-size:9px;color:#706d77;margin-top:4px}.grid{display:grid;gap:12px}.grid.three{grid-template-columns:repeat(3,minmax(0,1fr))}.card{border:1px solid var(--border);border-radius:16px;padding:16px;background:radial-gradient(circle at 0 0,rgba(255,107,95,.06),transparent 28%),radial-gradient(circle at 100% 100%,rgba(108,132,255,.06),transparent 28%),rgba(12,13,19,.62)}.card.dbl{cursor:pointer}.meta{font-size:8px;color:#77737e;text-transform:uppercase;letter-spacing:.1em}.card-title{font-size:17px;font-weight:600;letter-spacing:-.035em;margin:8px 0 5px}.card-sub{font-size:10px;color:#8d8994;line-height:1.55}.card-row{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:13px}.status{display:inline-flex;padding:4px 7px;border:1px solid rgba(255,255,255,.08);border-radius:99px;font-size:8px;text-transform:uppercase;letter-spacing:.08em;color:#aaa6af}.status.creating{color:#ffd3cf;border-color:rgba(255,107,95,.18)}.status.posted{color:#c1eed1;border-color:rgba(123,211,160,.18)}.status.ready{color:#dfe4ff;border-color:rgba(108,132,255,.2)}.pipeline{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px}.pipe{border:1px solid var(--border);border-radius:13px;padding:13px;background:rgba(255,255,255,.022)}.pipe strong{font-size:21px}.pipe span{display:block;font-size:8px;color:#6e6b75;text-transform:uppercase;letter-spacing:.09em;margin-top:4px}.table-wrap{overflow:auto;border:1px solid var(--border);border-radius:14px;background:rgba(10,11,16,.58)}table{width:100%;border-collapse:collapse;min-width:840px}th,td{padding:12px;border-bottom:1px solid rgba(255,255,255,.055);font-size:10px;text-align:left}th{font-size:8px;color:#6d6974;text-transform:uppercase;letter-spacing:.1em}td{color:#aaa7b0}td strong{color:#eeeaf0}.status-select{min-height:32px;border:1px solid var(--border);border-radius:8px;background:#0c0d13;color:#fff;padding:0 9px;font-size:9px}.calendar{display:grid;grid-template-columns:repeat(7,minmax(120px,1fr));gap:1px;border:1px solid var(--border);border-radius:14px;overflow:auto;background:var(--border)}.calday{min-height:140px;background:#0c0d13;padding:10px}.caldate{font-size:9px;color:#706d77}.event{margin-top:7px;border-left:2px solid var(--blue);padding:7px;border-radius:0 8px 8px 0;background:rgba(108,132,255,.055);font-size:9px}.empty{border:1px dashed rgba(255,255,255,.08);border-radius:13px;padding:18px;text-align:center;color:#66636d;font-size:10px}.page{display:none}.page.active{display:block}.modal-backdrop{position:fixed;inset:0;z-index:100;background:rgba(3,4,7,.72);display:none;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(10px)}.modal-backdrop.show{display:flex}.modal{width:min(900px,100%);max-height:88dvh;overflow:auto;border:1px solid rgba(255,255,255,.12);border-radius:20px;padding:20px;background:radial-gradient(circle at 90% 0,rgba(108,132,255,.09),transparent 26%),radial-gradient(circle at 6% 100%,rgba(255,107,95,.08),transparent 26%),#0b0c11;box-shadow:0 32px 100px rgba(0,0,0,.6)}.modal-head{display:flex;justify-content:space-between;gap:12px;margin-bottom:15px}.modal-title{font-size:20px;font-weight:600;letter-spacing:-.04em}.close{width:38px;height:38px;border-radius:10px;border:1px solid var(--border);background:rgba(255,255,255,.025);color:#c6c2cc;font-size:18px}.form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.field.full{grid-column:1/-1}.field label{display:block;font-size:8px;color:#77737e;text-transform:uppercase;letter-spacing:.11em;margin-bottom:6px;font-weight:600}.field input,.field select{width:100%;min-height:42px;border:1px solid var(--border);border-radius:10px;background:#0e0f15;color:#f2eff5;padding:10px 11px;outline:none}.field input:focus,.field select:focus{border-color:rgba(108,132,255,.5);box-shadow:0 0 0 3px rgba(108,132,255,.08)}.modal-actions{display:flex;justify-content:flex-end;gap:8px;flex-wrap:wrap;margin-top:16px}.rich-shell{border:1px solid var(--border);border-radius:12px;overflow:hidden;background:#0d0e14}.rich-toolbar{display:flex;gap:4px;padding:7px;border-bottom:1px solid rgba(255,255,255,.06);overflow:auto}.rich-toolbar button{min-width:32px;height:31px;border:1px solid transparent;border-radius:7px;background:transparent;color:#c8c4ce}.rich-toolbar button:hover{background:rgba(255,255,255,.06)}.rich{min-height:230px;max-height:48dvh;overflow:auto;padding:15px;outline:none;font-size:13px;line-height:1.68}.rich:empty:before{content:attr(data-placeholder);color:#66636d}.rich-footer{display:flex;justify-content:space-between;padding:7px 10px;border-top:1px solid rgba(255,255,255,.055);font-size:8px;color:#66636d}.media-upload{border:1px dashed rgba(255,255,255,.12);border-radius:12px;padding:12px}.media-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.media-upload input{display:none}.media-note{font-size:8px;color:#6d6974}.media-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:10px}.media-item{border:1px solid rgba(255,255,255,.07);border-radius:11px;overflow:hidden;background:#0b0c12}.preview{min-height:95px;display:grid;place-items:center}.preview img,.preview video{width:100%;height:145px;object-fit:cover}.preview audio{width:calc(100% - 14px);margin:12px 7px}.fileicon{width:44px;height:56px;border:1px solid rgba(255,255,255,.1);border-radius:8px;display:grid;place-items:center;font-size:10px;font-weight:700}.media-body{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;padding:9px;align-items:center}.media-name{font-size:9px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.media-meta{font-size:8px;color:#66636d;margin-top:2px}.media-actions{display:flex;gap:4px}.media-actions button{width:29px;height:29px;border-radius:7px;border:1px solid var(--border);background:rgba(255,255,255,.025);color:#bbb7c1}.media-empty{grid-column:1/-1;text-align:center;padding:11px;color:#66636d;font-size:8px}.media-badge{font-size:8px;color:#bec4e0;border:1px solid rgba(108,132,255,.15);padding:4px 7px;border-radius:99px}.mobile-top,.mobile-nav,.mobile-subnav{display:none}@media(max-width:1050px){:root{--sidebar:215px}.grid.three{grid-template-columns:repeat(2,minmax(0,1fr))}.pipeline{grid-template-columns:repeat(3,minmax(0,1fr))}}@media(max-width:820px){.app{display:block}.sidebar{display:none}.main{padding:max(12px,env(safe-area-inset-top)) max(12px,env(safe-area-inset-right)) calc(104px + env(safe-area-inset-bottom)) max(12px,env(safe-area-inset-left))}.mobile-top{display:flex;align-items:center;justify-content:space-between;padding:2px 2px 10px}.mobile-top .brand{padding:0}.mobile-top .k{font-size:25px}.mobile-top .rest,.mobile-top .create{font-size:20px}.topbar>div:first-child{display:none}.top-actions{width:100%}.searchbox{width:100%;min-width:0}.top-actions>.primary{display:none}.hero{padding:23px 18px}.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.grid.three{grid-template-columns:1fr}.pipeline{grid-template-columns:repeat(2,minmax(0,1fr))}.form-grid{grid-template-columns:1fr}.field.full{grid-column:auto}.field input,.field select{font-size:16px}.media-list{grid-template-columns:1fr}.mobile-nav{display:grid;position:fixed;left:max(10px,env(safe-area-inset-left));right:max(10px,env(safe-area-inset-right));bottom:max(10px,env(safe-area-inset-bottom));z-index:60;grid-template-columns:repeat(5,1fr);gap:4px;padding:7px;border:1px solid rgba(255,255,255,.12);border-radius:18px;background:rgba(9,10,15,.9);backdrop-filter:blur(22px)}.mobile-nav button{min-height:46px;border:0;background:transparent;color:#87838e;border-radius:12px;font-size:9px}.mobile-nav button.active{color:#fff;background:rgba(255,255,255,.065)}.mobile-nav .plus{background:var(--cream);color:#111218;font-size:20px}.mobile-subnav{position:fixed;left:max(10px,env(safe-area-inset-left));right:max(10px,env(safe-area-inset-right));bottom:calc(78px + env(safe-area-inset-bottom));z-index:70;border:1px solid rgba(255,255,255,.12);border-radius:18px;padding:12px;background:rgba(10,11,16,.97)}.mobile-subnav.show{display:block}.mobile-subnav-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}.mobile-subnav-grid button{min-height:54px;border:1px solid var(--border);border-radius:11px;background:rgba(255,255,255,.025);color:#d4d0da;text-align:left;padding:10px}.modal-backdrop{align-items:flex-end;padding:0}.modal{width:100%;max-height:92dvh;border-radius:22px 22px 0 0;border-left:0;border-right:0;border-bottom:0;padding:18px max(14px,env(safe-area-inset-right)) calc(22px + env(safe-area-inset-bottom)) max(14px,env(safe-area-inset-left))}table,thead,tbody,tr,th,td{display:block;width:100%}thead{display:none}table{min-width:0}tbody{display:grid;gap:9px}tr{border:1px solid var(--border);border-radius:13px;background:rgba(12,13,19,.62);padding:11px}td{border:0!important;padding:5px 0;display:grid;grid-template-columns:95px 1fr;gap:8px}td:first-child{display:block;border-bottom:1px solid rgba(255,255,255,.055)!important;padding-bottom:9px;margin-bottom:4px}.calendar{grid-template-columns:repeat(7,150px)}}
+
+    /* ==========================================================
+       KARSINIA.CREATE V2 — POPPINS / VERMILION + YELLOW + RED
+       ========================================================== */
+    :root{
+      --bg:#f65a3a;
+      --panel:rgba(255,248,218,.64);
+      --panel2:rgba(255,244,196,.78);
+      --text:#000000;
+      --muted:rgba(0,0,0,.66);
+      --faint:rgba(0,0,0,.48);
+      --border:rgba(0,0,0,.16);
+      --border2:rgba(0,0,0,.24);
+      --accent:#e34234;
+      --accent2:#ffd447;
+      --cream:#fff4c8;
+      --green:#8dcf89;
+      --yellow:#ffd447;
+      --red:#d7263d;
+    }
+
+    html{
+      background:#f45a3a;
+    }
+
+    body{
+      color:#000!important;
+      background:
+        radial-gradient(circle at 8% 7%,rgba(255,216,64,.96) 0%,rgba(255,216,64,.55) 17%,transparent 37%),
+        radial-gradient(circle at 92% 10%,rgba(215,38,61,.78) 0%,rgba(215,38,61,.45) 18%,transparent 39%),
+        radial-gradient(circle at 52% 92%,rgba(227,66,52,.80) 0%,rgba(227,66,52,.42) 21%,transparent 44%),
+        linear-gradient(135deg,#ffd447 0%,#f36a3f 47%,#d7263d 100%)!important;
+      background-attachment:fixed;
+    }
+
+    body,button,input,select,textarea,.rich-editor{
+      font-family:"Poppins",system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif!important;
+    }
+
+    body *,
+    button,
+    input,
+    select,
+    textarea,
+    option{
+      color:#000;
+    }
+
+    .sidebar{
+      background:rgba(255,244,199,.46)!important;
+      border-right:1px solid rgba(0,0,0,.15)!important;
+      backdrop-filter:blur(22px) saturate(120%)!important;
+      -webkit-backdrop-filter:blur(22px) saturate(120%)!important;
+      box-shadow:12px 0 40px rgba(91,20,10,.08);
+    }
+
+    .brand-k{
+      color:#000!important;
+      text-shadow:none!important;
+    }
+    .brand-rest,.brand-create,.brand-dot,.brand-sub{
+      color:#000!important;
+    }
+    .brand-sub{opacity:.55}
+
+    .nav-label{color:rgba(0,0,0,.48)!important}
+    .nav-item{
+      color:rgba(0,0,0,.70)!important;
+    }
+    .nav-icon{color:rgba(0,0,0,.55)!important}
+    .nav-item:hover{
+      background:rgba(255,255,255,.24)!important;
+      color:#000!important;
+    }
+    .nav-item.active{
+      color:#000!important;
+      background:rgba(255,244,196,.46)!important;
+      border:1px solid rgba(0,0,0,.13)!important;
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.20);
+    }
+    .nav-item.active .nav-icon{color:#000!important}
+    .sidebar-footer{
+      color:rgba(0,0,0,.52)!important;
+      border-top:1px solid rgba(0,0,0,.12)!important;
+    }
+
+    .topbar{
+      background:transparent!important;
+    }
+    .page-kicker,.page-title{color:#000!important}
+    .page-kicker{opacity:.55}
+
+    .searchbox{
+      color:#000!important;
+      background:rgba(255,246,207,.48)!important;
+      border:1px solid rgba(0,0,0,.16)!important;
+      box-shadow:none!important;
+    }
+    .searchbox span{color:#000!important}
+    .searchbox kbd{
+      color:#000!important;
+      background:rgba(255,255,255,.22)!important;
+      border-color:rgba(0,0,0,.12)!important;
+    }
+
+    .primary-btn,
+    .ghost-btn,
+    .mini-btn,
+    .danger-btn,
+    .filter-btn,
+    .status-select{
+      color:#000!important;
+      border-color:rgba(0,0,0,.16)!important;
+      box-shadow:none!important;
+    }
+    .primary-btn{
+      background:#ffe56b!important;
+      border-color:rgba(0,0,0,.18)!important;
+    }
+    .ghost-btn,.mini-btn,.filter-btn{
+      background:rgba(255,248,218,.50)!important;
+    }
+    .danger-btn{
+      background:rgba(215,38,61,.12)!important;
+      color:#000!important;
+    }
+    .filter-btn.active{
+      background:rgba(255,229,107,.75)!important;
+      color:#000!important;
+    }
+
+    .hero{
+      background:
+        linear-gradient(120deg,rgba(255,255,255,.20),transparent 38%),
+        rgba(255,247,210,.34)!important;
+      border:1px solid rgba(0,0,0,.15)!important;
+      box-shadow:0 18px 60px rgba(113,28,10,.08)!important;
+      backdrop-filter:blur(10px);
+      -webkit-backdrop-filter:blur(10px);
+    }
+    .hero-eyebrow,
+    .hero h2,
+    .hero p{
+      color:#000!important;
+    }
+    .hero-eyebrow{opacity:.68}
+    .hero-eyebrow:before{
+      background:linear-gradient(90deg,#d7263d,#e34234,#ffd447)!important;
+    }
+    .hero p{opacity:.70}
+
+    .stat{
+      border-top:1px solid rgba(0,0,0,.13)!important;
+    }
+    .stat strong,.stat span{color:#000!important}
+    .stat span{opacity:.55}
+
+    .section-title,.section-sub{
+      color:#000!important;
+    }
+    .section-sub{opacity:.55}
+
+    .card,
+    .pipe,
+    .folder,
+    .table-wrap{
+      background:rgba(255,248,218,.44)!important;
+      border-color:rgba(0,0,0,.14)!important;
+      box-shadow:0 14px 40px rgba(93,23,12,.06)!important;
+      backdrop-filter:blur(8px);
+      -webkit-backdrop-filter:blur(8px);
+    }
+    .card:hover{
+      background:rgba(255,248,218,.58)!important;
+      border-color:rgba(0,0,0,.22)!important;
+    }
+    .meta,.card-title,.card-sub,.folder-title,.folder-meta{
+      color:#000!important;
+    }
+    .meta,.card-sub,.folder-meta{opacity:.58}
+
+    .status{
+      color:#000!important;
+      background:rgba(255,255,255,.18)!important;
+      border-color:rgba(0,0,0,.14)!important;
+    }
+    .status.ready{
+      background:rgba(255,212,71,.32)!important;
+      color:#000!important;
+    }
+    .status.posted{
+      background:rgba(141,207,137,.30)!important;
+      color:#000!important;
+    }
+    .status.creating{
+      background:rgba(227,66,52,.18)!important;
+      color:#000!important;
+    }
+
+    .progress{
+      background:rgba(0,0,0,.10)!important;
+    }
+    .progress span{
+      background:linear-gradient(90deg,#d7263d,#e34234,#ffd447)!important;
+    }
+
+    .pipe strong,.pipe span{color:#000!important}
+    .pipe span{opacity:.52}
+
+    .folder-icon{
+      background:linear-gradient(135deg,rgba(227,66,52,.34),rgba(255,212,71,.60))!important;
+      border-color:rgba(0,0,0,.14)!important;
+    }
+
+    table{
+      background:transparent!important;
+    }
+    th,td{
+      border-bottom-color:rgba(0,0,0,.10)!important;
+      color:#000!important;
+    }
+    th{color:rgba(0,0,0,.54)!important}
+    td strong{color:#000!important}
+    .status-select,
+    .status-select option{
+      background:#fff0b8!important;
+      color:#000!important;
+    }
+
+    .calendar-grid{
+      background:rgba(0,0,0,.12)!important;
+      border-color:rgba(0,0,0,.14)!important;
+    }
+    .cal-day{
+      background:rgba(255,248,218,.50)!important;
+    }
+    .cal-date{color:rgba(0,0,0,.52)!important}
+    .cal-event{
+      color:#000!important;
+      background:rgba(255,212,71,.30)!important;
+      border-left-color:#d7263d!important;
+    }
+
+    .empty{
+      color:rgba(0,0,0,.52)!important;
+      border-color:rgba(0,0,0,.14)!important;
+      background:rgba(255,248,218,.24)!important;
+    }
+
+    .modal-backdrop{
+      background:rgba(92,24,12,.30)!important;
+      backdrop-filter:blur(10px)!important;
+      -webkit-backdrop-filter:blur(10px)!important;
+    }
+    .modal{
+      color:#000!important;
+      background:
+        radial-gradient(circle at 95% 0%,rgba(255,212,71,.48),transparent 28%),
+        radial-gradient(circle at 0% 100%,rgba(227,66,52,.25),transparent 30%),
+        rgba(255,244,196,.94)!important;
+      border-color:rgba(0,0,0,.18)!important;
+      box-shadow:0 30px 90px rgba(82,20,9,.20)!important;
+    }
+    .modal-title,.modal .page-kicker{color:#000!important}
+    .close-btn{
+      color:#000!important;
+      background:rgba(255,255,255,.20)!important;
+      border-color:rgba(0,0,0,.14)!important;
+    }
+
+    .field label{
+      color:#000!important;
+      opacity:.56;
+    }
+    .field input,
+    .field textarea,
+    .field select{
+      color:#000!important;
+      background:rgba(255,255,255,.30)!important;
+      border-color:rgba(0,0,0,.15)!important;
+    }
+    .field input::placeholder,
+    .field textarea::placeholder{
+      color:rgba(0,0,0,.42)!important;
+    }
+    .field input:focus,
+    .field textarea:focus,
+    .field select:focus{
+      border-color:rgba(215,38,61,.48)!important;
+      box-shadow:0 0 0 3px rgba(215,38,61,.10)!important;
+    }
+
+    .rich-editor-shell{
+      background:rgba(255,248,218,.56)!important;
+      border-color:rgba(0,0,0,.14)!important;
+    }
+    .rich-toolbar{
+      background:rgba(255,229,107,.20)!important;
+      border-bottom-color:rgba(0,0,0,.10)!important;
+    }
+    .rich-toolbar button{
+      color:#000!important;
+    }
+    .rich-toolbar button:hover{
+      background:rgba(0,0,0,.07)!important;
+      color:#000!important;
+    }
+    .rich-editor{
+      color:#000!important;
+      background:rgba(255,255,255,.08)!important;
+    }
+    .rich-editor:empty:before{
+      color:rgba(0,0,0,.40)!important;
+    }
+    .rich-editor blockquote{
+      color:#000!important;
+      background:rgba(255,212,71,.18)!important;
+      border-left-color:#d7263d!important;
+    }
+    .rich-footer{
+      color:rgba(0,0,0,.48)!important;
+      border-top-color:rgba(0,0,0,.10)!important;
+    }
+    .rich-footer strong{color:#000!important}
+
+    .media-upload,
+    .media-item{
+      background:rgba(255,248,218,.44)!important;
+      border-color:rgba(0,0,0,.14)!important;
+    }
+    .media-note,.media-meta{color:rgba(0,0,0,.50)!important}
+    .media-name{color:#000!important}
+    .media-preview{
+      background:rgba(255,239,174,.42)!important;
+    }
+    .media-icon{
+      color:#000!important;
+      border-color:rgba(0,0,0,.15)!important;
+    }
+    .media-actions button{
+      color:#000!important;
+      background:rgba(255,255,255,.22)!important;
+      border-color:rgba(0,0,0,.13)!important;
+    }
+    .media-empty{
+      color:rgba(0,0,0,.48)!important;
+    }
+    .media-badge{
+      color:#000!important;
+      background:rgba(255,212,71,.24)!important;
+      border-color:rgba(0,0,0,.12)!important;
+    }
+
+    #toast{
+      color:#000!important;
+      background:rgba(255,241,185,.95)!important;
+      border-color:rgba(0,0,0,.15)!important;
+    }
+
+    .mobile-nav{
+      background:rgba(255,244,196,.90)!important;
+      border-color:rgba(0,0,0,.16)!important;
+      box-shadow:0 16px 50px rgba(89,22,11,.18)!important;
+    }
+    .mobile-nav button{
+      color:rgba(0,0,0,.60)!important;
+    }
+    .mobile-nav button.active{
+      color:#000!important;
+      background:rgba(255,212,71,.40)!important;
+    }
+    .mobile-nav .plus{
+      background:#ffe56b!important;
+      color:#000!important;
+    }
+    .mobile-subnav{
+      background:rgba(255,244,196,.96)!important;
+      border-color:rgba(0,0,0,.16)!important;
+      box-shadow:0 20px 60px rgba(85,21,11,.18)!important;
+    }
+    .mobile-subnav-grid button{
+      color:#000!important;
+      background:rgba(255,255,255,.20)!important;
+      border-color:rgba(0,0,0,.13)!important;
+    }
+
+    @media(max-width:820px){
+      tr{
+        background:rgba(255,248,218,.52)!important;
+        border-color:rgba(0,0,0,.13)!important;
+      }
+      td:first-child{
+        border-bottom-color:rgba(0,0,0,.10)!important;
+      }
+    }
+
+  
+    /* ==========================================================
+       KARSINIA.CREATE V3 — WHITE EDITORS / FOLDERS / CALENDAR
+       ========================================================== */
+
+    /* Rich-text workspace is now genuinely white */
+    .rich-shell{
+      background:#ffffff!important;
+      border:1px solid rgba(0,0,0,.20)!important;
+      box-shadow:0 10px 28px rgba(83,28,8,.06)!important;
+    }
+    .rich-toolbar{
+      background:#fff8d6!important;
+      border-bottom:1px solid rgba(0,0,0,.12)!important;
+    }
+    .rich-toolbar button{
+      color:#111111!important;
+      font-weight:600!important;
+    }
+    .rich-toolbar button:hover{
+      background:rgba(0,0,0,.075)!important;
+      color:#000!important;
+    }
+    .rich{
+      background:#ffffff!important;
+      color:#000000!important;
+      min-height:300px!important;
+    }
+    .rich:empty:before{color:rgba(0,0,0,.38)!important}
+    .rich-footer{
+      background:#ffffff!important;
+      color:rgba(0,0,0,.48)!important;
+      border-top:1px solid rgba(0,0,0,.10)!important;
+    }
+    .rich-footer strong{color:#111!important}
+
+    /* Button labels should always be dark and legible */
+    .primary,.ghost,.mini,.danger,.close,.filter-btn,.status-select,
+    .modal-actions button,.actions button,.folder-actions button,
+    .calendar-controls button,.month-btn,.day-action{
+      color:#111111!important;
+      font-weight:600!important;
+      opacity:1!important;
+    }
+    .danger{
+      color:#111!important;
+      background:rgba(215,38,61,.10)!important;
+      border-color:rgba(0,0,0,.16)!important;
+    }
+    .ghost,.mini{
+      color:#111!important;
+      background:rgba(255,248,218,.60)!important;
+    }
+    .primary{
+      color:#111!important;
+      background:#ffe56b!important;
+    }
+
+    /* Folder system */
+    .folder-section{margin:20px 0 26px}
+    .folder-strip{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(215px,1fr));
+      gap:10px;
+      margin-top:10px
+    }
+    .folder-card{
+      position:relative;
+      min-width:0;
+      border:1px solid rgba(0,0,0,.15);
+      border-radius:15px;
+      padding:15px;
+      background:rgba(255,249,222,.54);
+      box-shadow:0 12px 34px rgba(91,27,8,.055);
+      cursor:pointer;
+      transition:transform .14s ease,border-color .14s ease,background .14s ease
+    }
+    .folder-card:hover{
+      transform:translateY(-1px);
+      border-color:rgba(0,0,0,.24);
+      background:rgba(255,250,226,.72)
+    }
+    .folder-icon{
+      width:42px;height:31px;border-radius:8px 8px 9px 9px;
+      margin-bottom:12px;
+      border:1px solid rgba(0,0,0,.14);
+      background:linear-gradient(135deg,rgba(215,38,61,.24),rgba(255,212,71,.68));
+      position:relative
+    }
+    .folder-icon:before{
+      content:"";position:absolute;left:5px;top:-6px;width:18px;height:7px;
+      border-radius:6px 6px 0 0;
+      background:rgba(227,66,52,.30);
+      border:1px solid rgba(0,0,0,.10);border-bottom:0
+    }
+    .folder-title{font-size:14px;font-weight:600;color:#000}
+    .folder-meta{font-size:8px;color:rgba(0,0,0,.52);margin-top:4px}
+    .folder-actions{display:flex;gap:6px;flex-wrap:wrap;margin-top:11px}
+    .folder-empty{
+      padding:14px;border:1px dashed rgba(0,0,0,.14);border-radius:12px;
+      background:rgba(255,248,218,.28);font-size:9px;color:rgba(0,0,0,.52)
+    }
+    .folder-badge{
+      display:inline-flex;align-items:center;gap:4px;
+      padding:4px 7px;border-radius:99px;border:1px solid rgba(0,0,0,.12);
+      background:rgba(255,229,107,.28);font-size:8px;color:#111
+    }
+    .folder-view-list{display:grid;gap:9px;margin-top:12px}
+    .folder-view-row{
+      border:1px solid rgba(0,0,0,.13);border-radius:12px;padding:12px;
+      background:#fff;display:grid;grid-template-columns:minmax(0,1fr) auto;
+      align-items:center;gap:10px
+    }
+    .folder-view-row .meta{color:rgba(0,0,0,.50)!important}
+    .folder-view-row strong{font-size:12px}
+
+    /* Calendar controls and white day cards */
+    .calendar-shell{margin-top:18px}
+    .calendar-controls{
+      display:flex;align-items:center;justify-content:space-between;gap:10px;
+      flex-wrap:wrap;margin-bottom:10px
+    }
+    .calendar-nav{display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+    .calendar-year{
+      min-height:38px;border:1px solid rgba(0,0,0,.16);border-radius:9px;
+      background:#fff;color:#000;padding:0 10px;font-size:10px;font-weight:600
+    }
+    .month-strip{
+      display:grid;grid-template-columns:repeat(12,minmax(58px,1fr));
+      gap:6px;margin:10px 0 13px
+    }
+    .month-btn{
+      min-height:36px;border:1px solid rgba(0,0,0,.14);border-radius:9px;
+      background:rgba(255,248,218,.60);font-size:9px
+    }
+    .month-btn.active{
+      background:#fff!important;
+      border-color:rgba(0,0,0,.30)!important;
+      box-shadow:0 4px 14px rgba(0,0,0,.06)
+    }
+    .calendar{
+      display:grid!important;
+      grid-template-columns:repeat(7,minmax(120px,1fr))!important;
+      gap:7px!important;
+      border:0!important;
+      border-radius:0!important;
+      overflow:auto!important;
+      background:transparent!important
+    }
+    .calendar-weekday{
+      min-height:31px;padding:6px 9px;
+      color:rgba(0,0,0,.60)!important;font-size:8px;font-weight:600;
+      text-transform:uppercase;letter-spacing:.08em
+    }
+    .calday{
+      min-height:145px!important;
+      padding:10px!important;
+      border:1px solid rgba(0,0,0,.15)!important;
+      border-radius:11px!important;
+      background:#ffffff!important;
+      color:#000!important;
+      cursor:pointer;
+      transition:transform .12s ease,border-color .12s ease,box-shadow .12s ease
+    }
+    .calday:hover{
+      transform:translateY(-1px);
+      border-color:rgba(0,0,0,.28)!important;
+      box-shadow:0 8px 22px rgba(85,27,8,.08)
+    }
+    .calday.other-month{
+      background:rgba(255,255,255,.64)!important;
+      opacity:.62
+    }
+    .calday.calendar-disabled{
+      opacity:.30!important;
+      cursor:not-allowed!important;
+      pointer-events:none!important
+    }
+    .caldate{
+      color:#000!important;font-size:9px!important;font-weight:600
+    }
+    .caldate small{
+      margin-left:4px;color:rgba(0,0,0,.42)!important;font-size:7px;font-weight:500
+    }
+    .event{
+      display:block;width:100%;
+      margin-top:6px!important;
+      border:1px solid rgba(0,0,0,.10)!important;
+      border-left:3px solid #d7263d!important;
+      padding:7px!important;border-radius:8px!important;
+      background:#fff2a8!important;color:#000!important;
+      font-size:8px!important;text-align:left
+    }
+    .event:hover{background:#ffe978!important}
+    .day-count{
+      display:inline-flex;margin-top:7px;font-size:7px;color:rgba(0,0,0,.50)
+    }
+    .day-detail-date{
+      font-size:26px;font-weight:700;letter-spacing:-.045em;color:#000
+    }
+    .day-detail-sub{font-size:9px;color:rgba(0,0,0,.52);margin-top:3px}
+
+    @media(max-width:1100px){
+      .month-strip{grid-template-columns:repeat(6,minmax(70px,1fr))}
+    }
+    @media(max-width:820px){
+      .rich{min-height:340px!important;font-size:16px!important}
+      .folder-strip{grid-template-columns:1fr}
+      .month-strip{grid-template-columns:repeat(4,minmax(66px,1fr))}
+      .calendar{grid-template-columns:repeat(7,142px)!important}
+      .calday{min-height:135px!important}
+      .folder-view-row{grid-template-columns:1fr}
+    }
+
+</style>
+</head>
+<body>
+<div class="app">
+<aside class="sidebar">
+  <div class="brand"><div class="brand-main"><span class="k">K</span><span class="rest">arsinia</span><span class="dot">.</span><span class="create">Create</span></div><div class="brand-sub">Content Operating System</div></div>
+  <div class="nav-group"><div class="nav-label">Workspace</div><button class="nav-item active" data-page="home"><span class="nav-icon">⌂</span>Home</button><button class="nav-item" data-page="create"><span class="nav-icon">✦</span>Create</button><button class="nav-item" data-page="ideas"><span class="nav-icon">◇</span>Ideas</button><button class="nav-item" data-page="planner"><span class="nav-icon">▤</span>Planner</button><button class="nav-item" data-page="calendar"><span class="nav-icon">□</span>Calendar</button></div>
+  <div class="nav-group"><div class="nav-label">Library</div><button class="nav-item" data-page="library"><span class="nav-icon">▦</span>Content Library</button><button class="nav-item" data-page="series"><span class="nav-icon">≡</span>Series</button><button class="nav-item" data-page="pillars"><span class="nav-icon">◫</span>Content Pillars</button><button class="nav-item" data-page="campaigns"><span class="nav-icon">◎</span>Campaigns</button><button class="nav-item" data-page="inspiration"><span class="nav-icon">✧</span>Inspiration</button><button class="nav-item" data-page="evergreen"><span class="nav-icon">∞</span>Evergreen Bank</button><button class="nav-item" data-page="assets"><span class="nav-icon">▣</span>Assets</button><button class="nav-item" data-page="scripts"><span class="nav-icon">¶</span>Scripts & Captions</button></div>
+  <div class="nav-group"><div class="nav-label">Distribution</div><button class="nav-item" data-page="handles"><span class="nav-icon">@</span>Handles</button><button class="nav-item" data-page="analytics"><span class="nav-icon">⌁</span>Analytics</button><button class="nav-item" data-page="repurpose"><span class="nav-icon">↻</span>Repurpose</button></div>
+  <div class="nav-group"><div class="nav-label">System</div><button class="nav-item" data-page="activity"><span class="nav-icon">⌁</span>Activity</button><button class="nav-item" data-page="archive"><span class="nav-icon">▤</span>Archive</button><button class="nav-item" data-page="trash"><span class="nav-icon">⌫</span>Trash</button><button class="nav-item" data-page="backups"><span class="nav-icon">⇩</span>Backups</button></div>
+</aside>
+<main class="main"><div class="content">
+<div class="mobile-top"><div class="brand"><div class="brand-main"><span class="k">K</span><span class="rest">arsinia</span><span class="dot">.</span><span class="create">Create</span></div></div><button class="primary" id="mobileCaptureTop">＋</button></div>
+<div class="topbar"><div><div class="page-kicker" id="pageKicker">Workspace</div><div class="page-title" id="pageTitle">Home</div></div><div class="top-actions"><div class="searchbox" id="searchOpen">⌕ <span>Search Karsinia.Create...</span><kbd>Ctrl K</kbd></div><button class="primary" id="captureTop">＋ Capture</button></div></div>
+<section class="page active" id="page-home"></section><section class="page" id="page-create"></section><section class="page" id="page-ideas"></section><section class="page" id="page-planner"></section><section class="page" id="page-calendar"></section><section class="page" id="page-library"></section><section class="page" id="page-series"></section><section class="page" id="page-pillars"></section><section class="page" id="page-campaigns"></section><section class="page" id="page-inspiration"></section><section class="page" id="page-evergreen"></section><section class="page" id="page-assets"></section><section class="page" id="page-scripts"></section><section class="page" id="page-handles"></section><section class="page" id="page-analytics"></section><section class="page" id="page-repurpose"></section><section class="page" id="page-activity"></section><section class="page" id="page-archive"></section><section class="page" id="page-trash"></section><section class="page" id="page-backups"></section>
+</div></main></div>
+<div class="mobile-subnav" id="mobileSubnav"><div class="mobile-subnav-grid" id="mobileSubnavGrid"></div></div>
+<nav class="mobile-nav"><button class="active" data-page="home">⌂<br>Home</button><button data-group="work">✦<br>Work</button><button class="plus" id="mobileCapture">＋</button><button data-group="library">▦<br>Library</button><button data-group="system">⋯<br>More</button></nav>
+
+<div class="modal-backdrop" id="captureModal"><div class="modal"><div class="modal-head"><div><div class="page-kicker">New object</div><div class="modal-title">Capture something</div></div><button class="close" data-close="captureModal">×</button></div><div class="form-grid">
+<div class="field"><label>Type</label><select id="fType"></select></div><div class="field"><label>Status</label><select id="fStatus"></select></div><div class="field full"><label>Title</label><input id="fTitle"></div><div class="field"><label>Platform</label><select id="fPlatform"></select></div><div class="field"><label>Handle</label><select id="fHandle"></select></div><div class="field"><label>Content Pillar</label><select id="fPillar"></select></div><div class="field"><label>Series</label><select id="fSeries"></select></div><div class="field"><label>Campaign</label><select id="fCampaign"></select></div><div class="field"><label>Priority</label><select id="fPriority"><option>Normal</option><option>High</option><option>Low</option></select></div><div class="field"><label>Folder</label><select id="fFolder"><option value="">No folder</option></select></div><div class="field"><label>Target publish date</label><input id="fPublishDate" type="date"></div><div class="field"><label>Publish time</label><input id="fPublishTime" type="time"></div><div class="field full"><label>Source / inspiration URL</label><input id="fSource" placeholder="https://..."></div><div class="field full"><label>Google Drive / working folder</label><input id="fDrive" placeholder="https://drive.google.com/..."></div>
+<div class="field full"><label>Long-form workspace</label><div class="rich-shell"><div class="rich-toolbar"><button type="button" onclick="richCmd('fNotes','bold')"><b>B</b></button><button type="button" onclick="richCmd('fNotes','italic')"><i>I</i></button><button type="button" onclick="richCmd('fNotes','underline')"><u>U</u></button><button type="button" onclick="richCmd('fNotes','formatBlock','H2')">H2</button><button type="button" onclick="richCmd('fNotes','insertUnorderedList')">• List</button><button type="button" onclick="richCmd('fNotes','insertOrderedList')">1. List</button><button type="button" onclick="richLink('fNotes')">Link</button><button type="button" onclick="richCmd('fNotes','undo')">↶</button><button type="button" onclick="richCmd('fNotes','redo')">↷</button></div><div class="rich" id="fNotes" contenteditable="true" data-placeholder="Hooks, script, caption, research, notes..."></div><div class="rich-footer"><span>Formatting saved</span><strong id="fNotesCount">0 / 10,000</strong></div></div></div>
+<div class="field full"><label>Media & files</label><div class="media-upload"><div class="media-row"><button type="button" class="ghost" onclick="document.getElementById('fMedia').click()">＋ Upload files</button><span class="media-note">Images · video · audio · PDFs · multiple files</span></div><input id="fMedia" type="file" multiple accept="image/*,video/*,audio/*,application/pdf,.pdf"><div class="media-list" id="fMediaList"></div></div></div>
+</div><div class="modal-actions"><button class="primary" id="saveCapture">Save</button></div></div></div>
+
+<div class="modal-backdrop" id="editModal"><div class="modal"><div class="modal-head"><div><div class="page-kicker">Details · edit anytime</div><div class="modal-title" id="editTitle">Content</div></div><button class="close" data-close="editModal">×</button></div><input id="eId" type="hidden"><div class="form-grid">
+<div class="field"><label>Type</label><select id="eType"></select></div><div class="field"><label>Status</label><select id="eStatus"></select></div><div class="field full"><label>Title</label><input id="eTitle"></div><div class="field"><label>Platform</label><select id="ePlatform"></select></div><div class="field"><label>Handle</label><select id="eHandle"></select></div><div class="field"><label>Content Pillar</label><select id="ePillar"></select></div><div class="field"><label>Series</label><select id="eSeries"></select></div><div class="field"><label>Campaign</label><select id="eCampaign"></select></div><div class="field"><label>Priority</label><select id="ePriority"><option>Normal</option><option>High</option><option>Low</option></select></div><div class="field"><label>Folder</label><select id="eFolder"><option value="">No folder</option></select></div><div class="field"><label>Target publish date</label><input id="ePublishDate" type="date"></div><div class="field"><label>Publish time</label><input id="ePublishTime" type="time"></div><div class="field full"><label>Published URL</label><input id="ePublishedUrl"></div><div class="field full"><label>Source / inspiration URL</label><input id="eSource"></div><div class="field full"><label>Google Drive / working folder</label><input id="eDrive"></div>
+<div class="field full"><label>Long-form workspace</label><div class="rich-shell"><div class="rich-toolbar"><button type="button" onclick="richCmd('eNotes','bold')"><b>B</b></button><button type="button" onclick="richCmd('eNotes','italic')"><i>I</i></button><button type="button" onclick="richCmd('eNotes','underline')"><u>U</u></button><button type="button" onclick="richCmd('eNotes','formatBlock','H2')">H2</button><button type="button" onclick="richCmd('eNotes','insertUnorderedList')">• List</button><button type="button" onclick="richCmd('eNotes','insertOrderedList')">1. List</button><button type="button" onclick="richLink('eNotes')">Link</button><button type="button" onclick="richCmd('eNotes','undo')">↶</button><button type="button" onclick="richCmd('eNotes','redo')">↷</button></div><div class="rich" id="eNotes" contenteditable="true"></div><div class="rich-footer"><span>Formatting saved</span><strong id="eNotesCount">0 / 10,000</strong></div></div></div>
+<div class="field full"><label>Media & files</label><div class="media-upload"><div class="media-row"><button type="button" class="ghost" onclick="document.getElementById('eMedia').click()">＋ Upload files</button><span class="media-note">Images · video · audio · PDFs · multiple files</span></div><input id="eMedia" type="file" multiple accept="image/*,video/*,audio/*,application/pdf,.pdf"><div class="media-list" id="eMediaList"></div></div></div>
+<div class="field"><label>Views / Impressions</label><input id="eViews" type="number" min="0"></div><div class="field"><label>Likes</label><input id="eLikes" type="number" min="0"></div><div class="field"><label>Comments</label><input id="eComments" type="number" min="0"></div><div class="field"><label>Shares</label><input id="eShares" type="number" min="0"></div><div class="field"><label>Saves</label><input id="eSaves" type="number" min="0"></div><div class="field"><label>Clicks</label><input id="eClicks" type="number" min="0"></div>
+</div><div class="modal-actions"><button class="danger" id="trashBtn">Move to Trash</button><button class="ghost" id="archiveBtn">Archive</button><button class="primary" id="saveEdit">Save changes</button></div></div></div>
+
+
+<div class="modal-backdrop" id="folderModal"><div class="modal" style="max-width:620px">
+  <div class="modal-head"><div><div class="page-kicker">Folder</div><div class="modal-title" id="folderModalTitle">New folder</div></div><button class="close" data-close="folderModal">×</button></div>
+  <input id="folderId" type="hidden"><input id="folderScope" type="hidden">
+  <div class="form-grid">
+    <div class="field full"><label>Folder name</label><input id="folderName" placeholder="e.g. Diwali Campaign"></div>
+    <div class="field full"><label>Notes</label><input id="folderNotes" placeholder="What belongs here?"></div>
+  </div>
+  <div class="modal-actions"><button class="danger" id="deleteFolderBtn" style="display:none">Delete folder</button><button class="primary" id="saveFolderBtn">Save folder</button></div>
+</div></div>
+
+<div class="modal-backdrop" id="folderViewModal"><div class="modal" style="max-width:780px">
+  <div class="modal-head"><div><div class="page-kicker">Folder</div><div class="modal-title" id="folderViewTitle">Folder</div><div class="folder-meta" id="folderViewMeta"></div></div><button class="close" data-close="folderViewModal">×</button></div>
+  <div class="actions" style="margin-top:0"><button class="primary" id="folderAddItemBtn">＋ Add entry here</button><button class="ghost" id="folderEditBtn">Edit folder</button></div>
+  <div class="folder-view-list" id="folderViewList"></div>
+</div></div>
+
+<div class="modal-backdrop" id="dayModal"><div class="modal" style="max-width:780px">
+  <div class="modal-head"><div><div class="page-kicker">Calendar day</div><div class="day-detail-date" id="dayTitle"></div><div class="day-detail-sub" id="daySubtitle"></div></div><button class="close" data-close="dayModal">×</button></div>
+  <input id="dayIso" type="hidden">
+  <div class="actions" style="margin-top:0"><button class="primary" id="dayAddBtn">＋ Add content on this date</button></div>
+  <div class="folder-view-list" id="dayItems"></div>
+</div></div>
+
+<div class="modal-backdrop" id="searchModal"><div class="modal" style="max-width:680px"><div class="modal-head"><div><div class="page-kicker">Global search</div><div class="modal-title">Search Karsinia.Create</div></div><button class="close" data-close="searchModal">×</button></div><div class="field full"><input id="searchInput" placeholder="Search titles, notes, platforms, pillars, campaigns..."></div><div id="searchResults" style="margin-top:12px"></div></div></div>
+<input id="backupImport" type="file" hidden accept=".zip,.json,application/json,application/zip">
+<script>
+const STORAGE_KEY='karsinia_create_state_v1',DB_NAME='karsinia_create_media_v1',STORE='attachments',LIMIT=10000;
+const TYPES=['Content','Idea','Inspiration','Campaign','Series','Pillar','Asset','Script','Evergreen','Handle'];
+const PLATFORMS=['Instagram','LinkedIn','YouTube','Facebook','X / Twitter','Threads','Pinterest','Newsletter','Website','Other'];
+const STATUSES=['Idea','Research','Planned','Creating','Review','Ready','Scheduled','Posted','Analyse','Repurpose','Evergreen','Archived'];
+const pageMeta={home:['Home','Workspace'],create:['Create','Workspace'],ideas:['Ideas','Workspace'],planner:['Planner','Workspace'],calendar:['Calendar','Workspace'],library:['Content Library','Library'],series:['Series','Library'],pillars:['Content Pillars','Library'],campaigns:['Campaigns','Library'],inspiration:['Inspiration','Library'],evergreen:['Evergreen Bank','Library'],assets:['Assets','Library'],scripts:['Scripts & Captions','Library'],handles:['Handles','Distribution'],analytics:['Analytics','Distribution'],repurpose:['Repurpose','Distribution'],activity:['Activity','System'],archive:['Archive','System'],trash:['Trash','System'],backups:['Backups','System']};
+const seed={settings:{lastBackupAt:null,lastRestoreAt:null},folders:[],items:[
+{id:'c1',type:'Content',title:'Five mistakes investors make during market volatility',platform:'LinkedIn',handle:'Box Wealth',pillar:'Investor Education',series:'Market Notes',campaign:'',status:'Creating',priority:'High',publishDate:'',publishTime:'',source:'',drive:'',publishedUrl:'',notes:'Draft the five mistakes, keep the tone calm, finish with an advisory CTA.',notesHtml:'',archived:false,trashed:false,mediaCount:0,created:new Date().toISOString(),updated:new Date().toISOString(),views:0,likes:0,comments:0,shares:0,saves:0,clicks:0},
+{id:'c2',type:'Idea',title:'What does a 3.8% portfolio exposure really mean?',platform:'Instagram',handle:'Box Wealth',pillar:'Portfolio Thinking',series:'',campaign:'',status:'Idea',priority:'Normal',publishDate:'',publishTime:'',source:'',drive:'',publishedUrl:'',notes:'Simple diversification explainer.',notesHtml:'',archived:false,trashed:false,mediaCount:0,created:new Date().toISOString(),updated:new Date().toISOString(),views:0,likes:0,comments:0,shares:0,saves:0,clicks:0},
+{id:'i1',type:'Inspiration',title:'Clean editorial finance carousel reference',platform:'Instagram',handle:'',pillar:'Visual Direction',series:'',campaign:'',status:'Research',priority:'Normal',publishDate:'',publishTime:'',source:'',drive:'',publishedUrl:'',notes:'Save typography and spacing reference.',notesHtml:'',archived:false,trashed:false,mediaCount:0,created:new Date().toISOString(),updated:new Date().toISOString(),views:0,likes:0,comments:0,shares:0,saves:0,clicks:0},
+{id:'h1',type:'Handle',title:'Box Wealth',platform:'LinkedIn',handle:'Box Wealth',pillar:'',series:'',campaign:'',status:'Evergreen',priority:'Normal',publishDate:'',publishTime:'',source:'',drive:'',publishedUrl:'',notes:'Primary company LinkedIn handle.',notesHtml:'',archived:false,trashed:false,mediaCount:0,created:new Date().toISOString(),updated:new Date().toISOString(),views:0,likes:0,comments:0,shares:0,saves:0,clicks:0},
+{id:'p1',type:'Pillar',title:'Investor Education',platform:'',handle:'',pillar:'Investor Education',series:'',campaign:'',status:'Evergreen',priority:'Normal',publishDate:'',publishTime:'',source:'',drive:'',publishedUrl:'',notes:'Explainers, frameworks and behavioural investing.',notesHtml:'',archived:false,trashed:false,mediaCount:0,created:new Date().toISOString(),updated:new Date().toISOString(),views:0,likes:0,comments:0,shares:0,saves:0,clicks:0},
+{id:'s1',type:'Series',title:'Market Notes',platform:'LinkedIn',handle:'Box Wealth',pillar:'Investor Education',series:'Market Notes',campaign:'',status:'Evergreen',priority:'Normal',publishDate:'',publishTime:'',source:'',drive:'',publishedUrl:'',notes:'Recurring market context.',notesHtml:'',archived:false,trashed:false,mediaCount:0,created:new Date().toISOString(),updated:new Date().toISOString(),views:0,likes:0,comments:0,shares:0,saves:0,clicks:0}
+],activity:[{time:new Date().toISOString(),text:'Karsinia.Create initialized.'}]};
+function load(){try{const r=localStorage.getItem(STORAGE_KEY);if(!r)return structuredClone(seed);const s=JSON.parse(r);s.items=s.items||[];s.folders=s.folders||[];s.activity=s.activity||[];s.settings=s.settings||{};s.items.forEach(x=>{x.notes??='';x.notesHtml??='';x.archived??=false;x.trashed??=false;x.mediaCount??=0;x.folderId??='';['views','likes','comments','shares','saves','clicks'].forEach(k=>x[k]??=0)});s.folders.forEach(f=>{f.notes??='';f.scope??='library'});return s}catch(e){console.error(e);return structuredClone(seed)}}let state=load();function save(){localStorage.setItem(STORAGE_KEY,JSON.stringify(state))}function now(){return new Date().toISOString()}function log(t){state.activity.unshift({time:now(),text:t});state.activity=state.activity.slice(0,500);save()}function esc(s=''){return String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}function currentPage(){return document.querySelector('.page.active')?.id.replace('page-','')||'home'}function active(){return state.items.filter(x=>!x.trashed&&!x.archived)}function vals(type){return [...new Set(active().filter(x=>x.type===type).map(x=>x.title).filter(Boolean))].sort()}function plain(h=''){const d=document.createElement('div');d.innerHTML=h;return(d.innerText||'').trim()}function preview(x,n=150){const t=x.notesHtml?plain(x.notesHtml):x.notes||'';return t.length>n?t.slice(0,n-1)+'…':t}function fmtDate(v){if(!v)return'—';const[y,m,d]=v.split('-').map(Number);return new Date(y,m-1,d).toLocaleDateString(undefined,{day:'2-digit',month:'short',year:'numeric'})}
+function fill(id,arr,sel='',blank=true){const e=document.getElementById(id);if(e)e.innerHTML=(blank?'<option value="">—</option>':'')+arr.map(v=>`<option ${v===sel?'selected':''}>${esc(v)}</option>`).join('')}function formOptions(p,it={}){fill(p+'Type',TYPES,it.type||'Content',false);fill(p+'Status',STATUSES,it.status||'Idea',false);fill(p+'Platform',PLATFORMS,it.platform||'');fill(p+'Handle',vals('Handle'),it.handle||'');fill(p+'Pillar',vals('Pillar'),it.pillar||'');fill(p+'Series',vals('Series'),it.series||'');fill(p+'Campaign',vals('Campaign'),it.campaign||'')}
+function foldersFor(scope){return(state.folders||[]).filter(f=>f.scope===scope).sort((a,b)=>a.name.localeCompare(b.name))}
+function folderById(id){return(state.folders||[]).find(f=>f.id===id)}
+function folderOptions(scope,selected=''){
+  const list=foldersFor(scope);
+  return '<option value="">No folder</option>'+list.map(f=>`<option value="${f.id}" ${f.id===selected?'selected':''}>${esc(f.name)}</option>`).join('')
+}
+function defaultScopeForItem(it){
+  const existing=it?.folderId?folderById(it.folderId):null;if(existing)return existing.scope;
+  const map={Idea:'ideas',Inspiration:'inspiration',Campaign:'campaigns',Series:'series',Pillar:'pillars',Asset:'assets',Script:'scripts',Evergreen:'evergreen',Handle:'handles',Content:'library'};
+  return map[it?.type]||'library'
+}
+let captureScope='library',captureFolderId='',currentFolderViewId='';
+function renderFolders(scope){
+  const fs=foldersFor(scope);
+  return `<div class="folder-section"><div class="section-head"><div><div class="section-title">Folders</div><div class="section-sub">${fs.length} folder${fs.length===1?'':'s'} · project-specific organisation</div></div><button class="ghost" onclick="openFolderEditor('${scope}')">＋ New folder</button></div>
+  ${fs.length?`<div class="folder-strip">${fs.map(f=>{const count=state.items.filter(x=>x.folderId===f.id&&!x.trashed).length;return `<div class="folder-card" ondblclick="openFolderView('${f.id}')" title="Double-click to open"><div class="folder-icon"></div><div class="folder-title">${esc(f.name)}</div><div class="folder-meta">${count} entr${count===1?'y':'ies'}${f.notes?' · '+esc(f.notes):''}</div><div class="folder-actions"><button class="mini" onclick="event.stopPropagation();openFolderView('${f.id}')">Open</button><button class="mini" onclick="event.stopPropagation();openFolderEditor('${scope}','${f.id}')">Edit</button></div></div>`}).join('')}</div>`:`<div class="folder-empty">No folders here yet. Create one whenever you want to group related content.</div>`}</div>`
+}
+function openFolderEditor(scope,id=''){
+  const f=id?folderById(id):null;
+  folderId.value=f?.id||'';folderScope.value=scope||f?.scope||currentPage();
+  folderName.value=f?.name||'';folderNotes.value=f?.notes||'';
+  folderModalTitle.textContent=f?'Edit folder':'New folder';
+  deleteFolderBtn.style.display=f?'inline-flex':'none';
+  openModal('folderModal');setTimeout(()=>folderName.focus(),30)
+}
+window.openFolderEditor=openFolderEditor;
+saveFolderBtn.onclick=()=>{
+  const name=folderName.value.trim();if(!name){toast('Add a folder name.');return}
+  if(folderId.value){
+    const f=folderById(folderId.value);if(!f)return;f.name=name;f.notes=folderNotes.value.trim();log(`Updated folder “${name}”.`)
+  }else{
+    const f={id:'f_'+Date.now()+'_'+Math.random().toString(36).slice(2,6),name,notes:folderNotes.value.trim(),scope:folderScope.value||currentPage(),created:now()};state.folders.push(f);log(`Created folder “${name}”.`)
+  }
+  save();closeModal('folderModal');renderPage(currentPage());toast('Folder saved.')
+};
+deleteFolderBtn.onclick=()=>{
+  const f=folderById(folderId.value);if(!f||!confirm(`Delete folder “${f.name}”? Entries inside will remain and become unfiled.`))return;
+  state.items.forEach(x=>{if(x.folderId===f.id)x.folderId=''});
+  state.folders=state.folders.filter(x=>x.id!==f.id);log(`Deleted folder “${f.name}”.`);save();closeModal('folderModal');renderPage(currentPage());toast('Folder deleted; entries preserved.')
+};
+function openFolderView(id){
+  const f=folderById(id);if(!f)return;currentFolderViewId=id;
+  folderViewTitle.textContent=f.name;folderViewMeta.textContent=`${pageMeta[f.scope]?.[0]||f.scope}${f.notes?' · '+f.notes:''}`;
+  const arr=state.items.filter(x=>x.folderId===id&&!x.trashed);
+  folderViewList.innerHTML=arr.length?arr.map(x=>`<div class="folder-view-row"><div><strong>${esc(x.title)}</strong><div class="meta">${esc(x.type)} · ${esc(x.status)}${x.platform?' · '+esc(x.platform):''}</div></div><button class="mini" onclick="editItem('${x.id}')">Open</button></div>`).join(''):'<div class="folder-empty">This folder is empty.</div>';
+  folderAddItemBtn.onclick=()=>{closeModal('folderViewModal');openCapture('Content',f.scope,f.id)};
+  folderEditBtn.onclick=()=>{closeModal('folderViewModal');openFolderEditor(f.scope,f.id)};
+  openModal('folderViewModal')
+}
+window.openFolderView=openFolderView;
+
+function richCmd(id,c,v=null){document.getElementById(id).focus();document.execCommand(c,false,v);richCount(id)}function richLink(id){const u=prompt('Paste link:');if(u)richCmd(id,'createLink',/^https?:\/\//i.test(u)?u:'https://'+u)}window.richCmd=richCmd;window.richLink=richLink;function richCount(id){const e=document.getElementById(id),c=document.getElementById(id+'Count');if(!e||!c)return;let t=(e.innerText||'').replace(/\u00a0/g,' ');if(t.length>LIMIT){e.innerText=t.slice(0,LIMIT);t=e.innerText;toast('10,000-character limit reached.')}c.textContent=`${t.length.toLocaleString()} / 10,000`}['fNotes','eNotes'].forEach(id=>document.getElementById(id).addEventListener('input',()=>richCount(id)));
+function openModal(id){document.getElementById(id).classList.add('show')}function closeModal(id){document.getElementById(id).classList.remove('show')}document.querySelectorAll('[data-close]').forEach(b=>b.onclick=()=>closeModal(b.dataset.close));let timer;function toast(m){let t=document.getElementById('toast');if(!t){t=document.createElement('div');t.id='toast';Object.assign(t.style,{position:'fixed',right:'18px',bottom:'18px',zIndex:'300',padding:'11px 14px',background:'#11131a',border:'1px solid rgba(255,255,255,.12)',borderRadius:'10px',fontSize:'10px'});document.body.appendChild(t)}t.textContent=m;t.style.display='block';clearTimeout(timer);timer=setTimeout(()=>t.style.display='none',2200)}
+let dbP=null,pending=[];const urls=new Map();function db(){if(dbP)return dbP;dbP=new Promise((res,rej)=>{const r=indexedDB.open(DB_NAME,1);r.onupgradeneeded=()=>{const d=r.result;if(!d.objectStoreNames.contains(STORE)){const s=d.createObjectStore(STORE,{keyPath:'id'});s.createIndex('owner','ownerId',{unique:false})}};r.onsuccess=()=>res(r.result);r.onerror=()=>rej(r.error)});return dbP}function kind(t='',n=''){t=t.toLowerCase();n=n.toLowerCase();if(t.startsWith('image/'))return'image';if(t.startsWith('video/'))return'video';if(t.startsWith('audio/'))return'audio';if(t==='application/pdf'||n.endsWith('.pdf'))return'pdf';return'file'}function bytes(b=0){return b<1024?`${b} B`:b<1048576?`${(b/1024).toFixed(1)} KB`:`${(b/1048576).toFixed(1)} MB`}async function getFiles(owner){const d=await db();return new Promise((res,rej)=>{const r=d.transaction(STORE,'readonly').objectStore(STORE).index('owner').getAll(owner);r.onsuccess=()=>res(r.result||[]);r.onerror=()=>rej(r.error)})}async function allFiles(){const d=await db();return new Promise((res,rej)=>{const r=d.transaction(STORE,'readonly').objectStore(STORE).getAll();r.onsuccess=()=>res(r.result||[]);r.onerror=()=>rej(r.error)})}async function addFiles(owner,files){const a=[...files].filter(f=>['image','video','audio','pdf'].includes(kind(f.type,f.name)));if(!a.length)return 0;const d=await db();await new Promise((res,rej)=>{const tx=d.transaction(STORE,'readwrite'),s=tx.objectStore(STORE);a.forEach(f=>s.put({id:'m_'+Date.now()+'_'+Math.random().toString(36).slice(2),ownerId:owner,name:f.name,type:f.type,size:f.size,createdAt:now(),blob:f}));tx.oncomplete=res;tx.onerror=()=>rej(tx.error)});const it=state.items.find(x=>x.id===owner);if(it){it.mediaCount=(await getFiles(owner)).length;save()}return a.length}async function putFile(r){const d=await db();return new Promise((res,rej)=>{const tx=d.transaction(STORE,'readwrite');tx.objectStore(STORE).put(r);tx.oncomplete=res;tx.onerror=()=>rej(tx.error)})}async function clearFiles(){const d=await db();return new Promise((res,rej)=>{const tx=d.transaction(STORE,'readwrite');tx.objectStore(STORE).clear();tx.oncomplete=res;tx.onerror=()=>rej(tx.error)})}async function delFile(id,owner){const d=await db();await new Promise((res,rej)=>{const tx=d.transaction(STORE,'readwrite');tx.objectStore(STORE).delete(id);tx.oncomplete=res;tx.onerror=()=>rej(tx.error)});const it=state.items.find(x=>x.id===owner);if(it){it.mediaCount=(await getFiles(owner)).length;save()}}function release(c){(urls.get(c)||[]).forEach(URL.revokeObjectURL);urls.set(c,[])}async function renderMedia(owner,c){const el=document.getElementById(c);if(!el)return;release(c);const a=await getFiles(owner);if(!a.length){el.innerHTML='<div class="media-empty">No files uploaded yet.</div>';return}el.innerHTML=a.map(r=>{const k=kind(r.type,r.name),u=URL.createObjectURL(r.blob),list=urls.get(c)||[];list.push(u);urls.set(c,list);const p=k==='image'?`<img src="${u}">`:k==='video'?`<video src="${u}" controls playsinline></video>`:k==='audio'?`<audio src="${u}" controls></audio>`:`<div class="fileicon">PDF</div>`;return`<div class="media-item"><div class="preview">${p}</div><div class="media-body"><div><div class="media-name">${esc(r.name)}</div><div class="media-meta">${k.toUpperCase()} · ${bytes(r.size)}</div></div><div class="media-actions"><button onclick="downloadFile('${r.id}')">⇩</button><button onclick="removeFile('${r.id}','${owner}','${c}')">×</button></div></div></div>`}).join('')}async function downloadFile(id){const r=(await allFiles()).find(x=>x.id===id);if(!r)return;const u=URL.createObjectURL(r.blob),a=document.createElement('a');a.href=u;a.download=r.name;a.click();setTimeout(()=>URL.revokeObjectURL(u),2000)}async function removeFile(id,o,c){if(!confirm('Remove this file?'))return;await delFile(id,o);await renderMedia(o,c);renderPage(currentPage())}window.downloadFile=downloadFile;window.removeFile=removeFile;function renderPending(){const e=document.getElementById('fMediaList');if(!pending.length){e.innerHTML='<div class="media-empty">Files will be attached when you save.</div>';return}e.innerHTML=pending.map((f,i)=>`<div class="media-item"><div class="media-body"><div><div class="media-name">${esc(f.name)}</div><div class="media-meta">${kind(f.type,f.name).toUpperCase()} · ${bytes(f.size)}</div></div><button class="mini" onclick="pending.splice(${i},1);renderPending()">Remove</button></div></div>`).join('')}document.getElementById('fMedia').onchange=e=>{pending.push(...[...e.target.files]);renderPending();e.target.value=''};document.getElementById('eMedia').onchange=async e=>{const id=eId.value;if(!id)return;const n=await addFiles(id,e.target.files);await renderMedia(id,'eMediaList');e.target.value='';toast(`${n} file${n===1?'':'s'} added.`)};
+const groups={work:[['create','Create'],['ideas','Ideas'],['planner','Planner'],['calendar','Calendar']],library:[['library','Content Library'],['inspiration','Inspiration'],['evergreen','Evergreen'],['assets','Assets'],['campaigns','Campaigns'],['series','Series']],system:[['handles','Handles'],['analytics','Analytics'],['repurpose','Repurpose'],['backups','Backups'],['activity','Activity']]};function closeSub(){mobileSubnav.classList.remove('show')}document.querySelectorAll('.mobile-nav button[data-group]').forEach(b=>b.onclick=()=>{const same=mobileSubnav.classList.contains('show')&&mobileSubnav.dataset.group===b.dataset.group;if(same){closeSub();return}mobileSubnav.dataset.group=b.dataset.group;mobileSubnavGrid.innerHTML=groups[b.dataset.group].map(([p,l])=>`<button onclick="goPage('${p}')">${l}</button>`).join('');mobileSubnav.classList.add('show')});function goPage(p){document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));document.getElementById('page-'+p)?.classList.add('active');document.querySelectorAll('.nav-item,.mobile-nav button[data-page]').forEach(b=>b.classList.toggle('active',b.dataset.page===p));pageTitle.textContent=pageMeta[p]?.[0]||p;pageKicker.textContent=pageMeta[p]?.[1]||'';closeSub();renderPage(p)}window.goPage=goPage;document.querySelectorAll('.nav-item,.mobile-nav button[data-page]').forEach(b=>b.onclick=()=>goPage(b.dataset.page));
+function sclass(s){return s==='Posted'?'posted':s==='Creating'?'creating':['Ready','Scheduled'].includes(s)?'ready':''}function card(x){const f=x.folderId?folderById(x.folderId):null;return`<div class="card dbl" ondblclick="editItem('${x.id}')"><div style="display:flex;justify-content:space-between;gap:8px;align-items:center"><div style="display:flex;gap:5px;align-items:center;flex-wrap:wrap"><div class="meta">${esc(x.type)}</div>${f?`<span class="folder-badge">▰ ${esc(f.name)}</span>`:''}</div>${x.mediaCount?`<span class="media-badge">▣ ${x.mediaCount}</span>`:''}</div><div class="card-title">${esc(x.title)}</div><div class="card-sub">${esc(preview(x)||'No notes yet.')}</div><div class="card-row"><span class="status ${sclass(x.status)}">${esc(x.status)}</span><span class="meta">${esc(x.platform||'')}</span></div></div>`}function grid(a,msg='Nothing here yet.'){return a.length?`<div class="grid three">${a.map(card).join('')}</div>`:`<div class="empty">${msg}</div>`}function section(t,s,b,a=''){return`<div class="section"><div class="section-head"><div><div class="section-title">${t}</div><div class="section-sub">${s}</div></div>${a}</div>${b}</div>`}function home(){const a=active(),creating=a.filter(x=>['Creating','Review'].includes(x.status)),due=a.filter(x=>x.publishDate&&x.status!=='Posted').sort((x,y)=>x.publishDate.localeCompare(y.publishDate)),recent=a.filter(x=>x.status==='Posted').slice(0,4),count=s=>a.filter(x=>x.status===s).length;return`<div class="hero"><div class="eyebrow">Karsinia.Create</div><h2>What are we creating?</h2><p>Your private command centre for ideas, planning, production, publishing, performance and reuse.</p><div class="actions"><button class="primary" onclick="openCapture('Content','home')">＋ Capture content</button><button class="ghost" onclick="openCapture('Idea','home')">＋ Quick idea</button><button class="ghost" onclick="openFolderEditor('home')">＋ New folder</button></div><div class="stats"><div class="stat"><strong>${a.length}</strong><span>objects</span></div><div class="stat"><strong>${creating.length}</strong><span>creating</span></div><div class="stat"><strong>${due.length}</strong><span>upcoming</span></div><div class="stat"><strong>${count('Posted')}</strong><span>posted</span></div></div></div>${renderFolders('home')}${section('Content pipeline','Thought to distribution.',`<div class="pipeline">${['Idea','Planned','Creating','Review','Ready','Scheduled'].map(s=>`<div class="pipe"><strong>${count(s)}</strong><span>${s}</span></div>`).join('')}</div>`)}${section('Continue creating','Things already in motion.',grid(creating.slice(0,6),'Nothing in production.'),'<button class="ghost" onclick="goPage(\'create\')">Open Create</button>')}${section('Coming up','Nearest publishing dates.',grid(due.slice(0,6),'Nothing scheduled yet.'),'<button class="ghost" onclick="goPage(\'calendar\')">Calendar</button>')}${section('Recently published','Posted stays alive and editable.',grid(recent,'Nothing published yet.'))}${section('Recent activity','Operational history.',`<div class="card">${state.activity.slice(0,6).map(x=>`<div style="padding:8px 0;border-bottom:1px solid rgba(255,255,255,.055);font-size:10px">${esc(x.text)}<div class="meta" style="margin-top:3px">${new Date(x.time).toLocaleString()}</div></div>`).join('')}</div>`)}`}
+function generic(title,desc,fn,type){const a=active().filter(fn),scope=currentPage();return`<div class="hero"><div class="eyebrow">${title}</div><h2>${desc}</h2><div class="actions"><button class="primary" onclick="openCapture('${type}','${scope}')">＋ Add ${type}</button><button class="ghost" onclick="openFolderEditor('${scope}')">＋ New folder</button></div></div>${renderFolders(scope)}${section('Entries',`${a.length} total`,grid(a))}`}function planner(){const a=active().filter(x=>['Planned','Creating','Review','Ready','Scheduled'].includes(x.status)).sort((x,y)=>(x.publishDate||'9999').localeCompare(y.publishDate||'9999'));return`<div class="hero"><div class="eyebrow">Planner</div><h2>Intent before commitment.</h2><p>Plan what should exist, then move it toward an actual publishing date.</p><div class="actions"><button class="primary" onclick="openCapture('Content','planner')">＋ Plan content</button><button class="ghost" onclick="openFolderEditor('planner')">＋ New folder</button></div></div>${renderFolders('planner')}<div class="table-wrap"><table><thead><tr><th>Content</th><th>Type</th><th>Platform</th><th>Status</th><th>Publish</th></tr></thead><tbody>${a.map(x=>`<tr ondblclick="editItem('${x.id}')"><td><strong>${esc(x.title)}</strong></td><td>${esc(x.type)}</td><td>${esc(x.platform||'—')}</td><td><select class="status-select" onchange="quickStatus('${x.id}',this.value)">${STATUSES.map(s=>`<option ${s===x.status?'selected':''}>${s}</option>`).join('')}</select></td><td>${fmtDate(x.publishDate)}</td></tr>`).join('')||'<tr><td colspan="5">Nothing planned yet.</td></tr>'}</tbody></table></div>`}
+
+const CAL_START_YEAR=2026,CAL_END_YEAR=2050;
+let calendarYear=Math.min(CAL_END_YEAR,Math.max(CAL_START_YEAR,new Date().getFullYear()));
+let calendarMonth=new Date().getMonth();
+const MONTH_NAMES=['January','February','March','April','May','June','July','August','September','October','November','December'];
+function setCalendarMonth(m){calendarMonth=Math.max(0,Math.min(11,Number(m)));renderPage('calendar')}
+function setCalendarYear(y){calendarYear=Math.max(CAL_START_YEAR,Math.min(CAL_END_YEAR,Number(y)));renderPage('calendar')}
+function shiftCalendar(delta){
+  let m=calendarMonth+delta,y=calendarYear;
+  if(m<0){m=11;y--}if(m>11){m=0;y++}
+  if(y<CAL_START_YEAR||y>CAL_END_YEAR)return;
+  calendarMonth=m;calendarYear=y;renderPage('calendar')
+}
+window.setCalendarMonth=setCalendarMonth;window.setCalendarYear=setCalendarYear;window.shiftCalendar=shiftCalendar;
+function isoDate(d){return`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`}
+function openDay(iso){
+  dayIso.value=iso;
+  const [y,m,d]=iso.split('-').map(Number),date=new Date(y,m-1,d);
+  dayTitle.textContent=date.toLocaleDateString(undefined,{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+  const arr=active().filter(x=>x.publishDate===iso).sort((a,b)=>(a.publishTime||'').localeCompare(b.publishTime||''));
+  daySubtitle.textContent=`${arr.length} content item${arr.length===1?'':'s'} planned for this day`;
+  dayItems.innerHTML=arr.length?arr.map(x=>`<div class="folder-view-row"><div><strong>${esc(x.title)}</strong><div class="meta">${esc(x.status)}${x.publishTime?' · '+esc(x.publishTime):''}${x.platform?' · '+esc(x.platform):''}</div></div><button class="mini" onclick="editItem('${x.id}')">Open</button></div>`).join(''):'<div class="folder-empty">Nothing planned on this date yet.</div>';
+  dayAddBtn.onclick=()=>{closeModal('dayModal');openCapture('Content','calendar','',iso)};
+  openModal('dayModal')
+}
+window.openDay=openDay;
+function calendar(){
+  const first=new Date(calendarYear,calendarMonth,1);
+  const start=new Date(calendarYear,calendarMonth,1-first.getDay());
+  const years=Array.from({length:CAL_END_YEAR-CAL_START_YEAR+1},(_,i)=>CAL_START_YEAR+i);
+  let cells='';
+  for(let i=0;i<42;i++){
+    const d=new Date(start);d.setDate(start.getDate()+i);
+    const iso=isoDate(d),same=d.getMonth()===calendarMonth,inRange=d.getFullYear()>=CAL_START_YEAR&&d.getFullYear()<=CAL_END_YEAR,ev=inRange?active().filter(x=>x.publishDate===iso):[];
+    cells+=`<div class="calday ${same?'':'other-month'} ${inRange?'':'calendar-disabled'}" ${inRange?`onclick="openDay('${iso}')" title="Click to expand ${iso}"`:'title="Outside calendar range"'}>
+      <div class="caldate">${d.getDate()}<small>${d.toLocaleDateString(undefined,{month:'short'})}</small></div>
+      ${ev.slice(0,3).map(x=>`<button class="event" onclick="event.stopPropagation();editItem('${x.id}')">${esc(x.title)}</button>`).join('')}
+      ${ev.length>3?`<span class="day-count">+${ev.length-3} more</span>`:''}
+    </div>`
+  }
+  return`<div class="hero"><div class="eyebrow">Calendar</div><h2>${MONTH_NAMES[calendarMonth]} ${calendarYear}</h2><p>Every month through 2050 is selectable. Click any day to expand it, review what is planned and add content directly to that date.</p><div class="actions"><button class="primary" onclick="openCapture('Content','calendar')">＋ Add content</button><button class="ghost" onclick="openFolderEditor('calendar')">＋ New folder</button></div></div>
+  ${renderFolders('calendar')}
+  <div class="calendar-shell">
+    <div class="calendar-controls">
+      <div class="calendar-nav"><button class="ghost" onclick="shiftCalendar(-1)">← Previous</button><button class="ghost" onclick="shiftCalendar(1)">Next →</button></div>
+      <select class="calendar-year" onchange="setCalendarYear(this.value)">${years.map(y=>`<option ${y===calendarYear?'selected':''}>${y}</option>`).join('')}</select>
+    </div>
+    <div class="month-strip">${MONTH_NAMES.map((n,i)=>`<button class="month-btn ${i===calendarMonth?'active':''}" onclick="setCalendarMonth(${i})">${n.slice(0,3)}</button>`).join('')}</div>
+    <div class="calendar">
+      ${['Sun','Mon','Tue','Wed','Thu','Fri','Sat'].map(x=>`<div class="calendar-weekday">${x}</div>`).join('')}
+      ${cells}
+    </div>
+  </div>`
+}
+function analytics(){const p=active().filter(x=>x.status==='Posted'),sum=k=>p.reduce((a,x)=>a+(Number(x[k])||0),0);return`<div class="hero"><div class="eyebrow">Analytics</div><h2>Learn what actually works.</h2><p>Performance lives with the content itself.</p><div class="actions"><button class="ghost" onclick="openFolderEditor('analytics')">＋ New folder</button></div><div class="stats"><div class="stat"><strong>${sum('views').toLocaleString()}</strong><span>views</span></div><div class="stat"><strong>${sum('likes').toLocaleString()}</strong><span>likes</span></div><div class="stat"><strong>${sum('shares').toLocaleString()}</strong><span>shares</span></div><div class="stat"><strong>${sum('saves').toLocaleString()}</strong><span>saves</span></div></div></div>${renderFolders('analytics')}${section('Published content',`${p.length} entries`,grid(p,'No published content yet.'))}`}function activity(){return`<div class="hero"><div class="eyebrow">Activity</div><h2>Nothing changes silently.</h2></div><div class="card">${state.activity.map(x=>`<div style="padding:9px 0;border-bottom:1px solid rgba(255,255,255,.055)"><div style="font-size:10px">${esc(x.text)}</div><div class="meta" style="margin-top:3px">${new Date(x.time).toLocaleString()}</div></div>`).join('')}</div>`}function trash(){const a=state.items.filter(x=>x.trashed);return`<div class="hero"><div class="eyebrow">Trash</div><h2>Nothing is permanently deleted by accident.</h2></div>${a.length?`<div class="grid three">${a.map(x=>`<div class="card"><div class="card-title">${esc(x.title)}</div><div class="card-row"><button class="ghost" onclick="restoreItem('${x.id}')">Restore</button><button class="danger" onclick="permaDelete('${x.id}')">Delete forever</button></div></div>`).join('')}</div>`:'<div class="empty">Trash is empty.</div>'}`}function backups(){const media=state.items.reduce((a,x)=>a+(x.mediaCount||0),0);return`<div class="hero"><div class="eyebrow">Backups</div><h2>Protect the system before you need to.</h2><p>Export one portable ZIP containing Karsinia.Create data and direct uploads.</p><div class="stats"><div class="stat"><strong>${state.items.length}</strong><span>objects</span></div><div class="stat"><strong>${media}</strong><span>uploaded files</span></div><div class="stat"><strong>${state.settings.lastBackupAt?new Date(state.settings.lastBackupAt).toLocaleDateString():'Never'}</strong><span>last backup</span></div><div class="stat"><strong>${state.settings.lastRestoreAt?new Date(state.settings.lastRestoreAt).toLocaleDateString():'Never'}</strong><span>last restore</span></div></div><div class="actions"><button class="primary" onclick="exportBackup()">⇩ Download full backup</button><button class="ghost" onclick="backupImport.click()">↥ Restore backup</button></div></div>`}function renderPage(p){const e=document.getElementById('page-'+p);if(!e)return;if(p==='home')e.innerHTML=home();if(p==='create')e.innerHTML=generic('Create','Everything currently being made.',x=>['Content','Script'].includes(x.type)&&['Creating','Review','Ready'].includes(x.status),'Content');if(p==='ideas')e.innerHTML=generic('Ideas','Capture thoughts before they disappear.',x=>x.type==='Idea','Idea');if(p==='planner')e.innerHTML=planner();if(p==='calendar')e.innerHTML=calendar();if(p==='library')e.innerHTML=generic('Content Library','Your permanent content memory.',x=>['Content','Script','Evergreen'].includes(x.type)||x.status==='Posted','Content');if(p==='series')e.innerHTML=generic('Series','Recurring formats that compound over time.',x=>x.type==='Series','Series');if(p==='pillars')e.innerHTML=generic('Content Pillars','The themes you deliberately talk about.',x=>x.type==='Pillar','Pillar');if(p==='campaigns')e.innerHTML=generic('Campaigns','Content grouped around one initiative.',x=>x.type==='Campaign','Campaign');if(p==='inspiration')e.innerHTML=generic('Inspiration','Your visual and conceptual swipe file.',x=>x.type==='Inspiration','Inspiration');if(p==='evergreen')e.innerHTML=generic('Evergreen Bank','Content worth resurfacing later.',x=>x.type==='Evergreen'||x.status==='Evergreen','Evergreen');if(p==='assets')e.innerHTML=generic('Assets','Reusable creative files and references.',x=>x.type==='Asset','Asset');if(p==='scripts')e.innerHTML=generic('Scripts & Captions','Long-form writing ready to become content.',x=>x.type==='Script','Script');if(p==='handles')e.innerHTML=generic('Handles','Your actual publishing identities.',x=>x.type==='Handle','Handle');if(p==='analytics')e.innerHTML=analytics();if(p==='repurpose')e.innerHTML=generic('Repurpose','Content with more life left in it.',x=>x.status==='Repurpose'||x.type==='Evergreen','Content');if(p==='activity')e.innerHTML=activity();if(p==='archive')e.innerHTML=generic('Archive','Only things you deliberately put away.',x=>x.archived,'Content');if(p==='trash')e.innerHTML=trash();if(p==='backups')e.innerHTML=backups()}
+function openCapture(type='Content',scope='',folderId='',publishDate=''){captureScope=scope||currentPage()||'library';captureFolderId=folderId||'';pending=[];renderPending();formOptions('f',{type,status:type==='Idea'?'Idea':'Planned'});fTitle.value='';fPriority.value='Normal';fFolder.innerHTML=folderOptions(captureScope,captureFolderId);fFolder.value=captureFolderId;fPublishDate.value=publishDate||'';fPublishTime.value='';fSource.value='';fDrive.value='';fNotes.innerHTML='';richCount('fNotes');openModal('captureModal')}window.openCapture=openCapture;captureTop.onclick=()=>openCapture('Content');mobileCapture.onclick=()=>openCapture('Content');mobileCaptureTop.onclick=()=>openCapture('Content');saveCapture.onclick=async()=>{const title=fTitle.value.trim();if(!title){toast('Add a title first.');return}const id='i_'+Date.now()+'_'+Math.random().toString(36).slice(2,7),it={id,type:fType.value,title,status:fStatus.value,platform:fPlatform.value,handle:fHandle.value,pillar:fPillar.value,series:fSeries.value,campaign:fCampaign.value,priority:fPriority.value,folderId:fFolder.value||captureFolderId||'',publishDate:fPublishDate.value,publishTime:fPublishTime.value,source:fSource.value.trim(),drive:fDrive.value.trim(),publishedUrl:'',notes:fNotes.innerText.trim(),notesHtml:fNotes.innerHTML,archived:false,trashed:false,mediaCount:0,created:now(),updated:now(),views:0,likes:0,comments:0,shares:0,saves:0,clicks:0};state.items.unshift(it);save();if(pending.length)await addFiles(id,pending);log(`Added ${it.type.toLowerCase()} “${title}”.`);closeModal('captureModal');renderPage(currentPage());toast(`${it.type} added.`)};
+function editItem(id){const it=state.items.find(x=>x.id===id);if(!it)return;eId.value=id;formOptions('e',it);eTitle.value=it.title;ePriority.value=it.priority||'Normal';const editScope=defaultScopeForItem(it);eFolder.innerHTML=folderOptions(editScope,it.folderId||'');eFolder.value=it.folderId||'';ePublishDate.value=it.publishDate||'';ePublishTime.value=it.publishTime||'';ePublishedUrl.value=it.publishedUrl||'';eSource.value=it.source||'';eDrive.value=it.drive||'';eNotes.innerHTML=it.notesHtml||esc(it.notes||'');richCount('eNotes');['Views','Likes','Comments','Shares','Saves','Clicks'].forEach(k=>document.getElementById('e'+k).value=it[k.toLowerCase()]||0);editTitle.textContent=it.title;renderMedia(id,'eMediaList');openModal('editModal')}window.editItem=editItem;saveEdit.onclick=()=>{const it=state.items.find(x=>x.id===eId.value);if(!it)return;it.type=eType.value;it.status=eStatus.value;it.title=eTitle.value.trim()||it.title;it.platform=ePlatform.value;it.handle=eHandle.value;it.pillar=ePillar.value;it.series=eSeries.value;it.campaign=eCampaign.value;it.priority=ePriority.value;it.folderId=eFolder.value||'';it.publishDate=ePublishDate.value;it.publishTime=ePublishTime.value;it.publishedUrl=ePublishedUrl.value.trim();it.source=eSource.value.trim();it.drive=eDrive.value.trim();it.notes=eNotes.innerText.trim();it.notesHtml=eNotes.innerHTML;['views','likes','comments','shares','saves','clicks'].forEach(k=>it[k]=Number(document.getElementById('e'+k[0].toUpperCase()+k.slice(1)).value)||0);it.updated=now();log(`Updated “${it.title}”.`);closeModal('editModal');renderPage(currentPage());toast('Changes saved.')} ;trashBtn.onclick=()=>{const it=state.items.find(x=>x.id===eId.value);if(!it)return;it.trashed=true;it.archived=false;log(`Moved “${it.title}” to Trash.`);closeModal('editModal');renderPage(currentPage())};archiveBtn.onclick=()=>{const it=state.items.find(x=>x.id===eId.value);if(!it)return;it.archived=!it.archived;log(`${it.archived?'Archived':'Restored'} “${it.title}”.`);closeModal('editModal');renderPage(currentPage())};function quickStatus(id,s){const it=state.items.find(x=>x.id===id);if(!it)return;it.status=s;it.updated=now();log(`Changed “${it.title}” to ${s}.`);renderPage(currentPage())}window.quickStatus=quickStatus;function restoreItem(id){const it=state.items.find(x=>x.id===id);if(!it)return;it.trashed=false;log(`Restored “${it.title}”.`);renderPage('trash')}async function permaDelete(id){const it=state.items.find(x=>x.id===id);if(!it||!confirm(`Permanently delete “${it.title}”?`))return;const d=await db(),files=await getFiles(id);await new Promise((res,rej)=>{const tx=d.transaction(STORE,'readwrite'),s=tx.objectStore(STORE);files.forEach(f=>s.delete(f.id));tx.oncomplete=res;tx.onerror=()=>rej(tx.error)});state.items=state.items.filter(x=>x.id!==id);log(`Permanently deleted “${it.title}”.`);renderPage('trash')}window.restoreItem=restoreItem;window.permaDelete=permaDelete;
+searchOpen.onclick=()=>{openModal('searchModal');setTimeout(()=>searchInput.focus(),30)};searchInput.oninput=e=>{const q=e.target.value.toLowerCase().trim();if(!q){searchResults.innerHTML='<div class="empty">Start typing.</div>';return}const a=state.items.filter(x=>!x.trashed&&[x.title,x.type,x.platform,x.handle,x.pillar,x.series,x.campaign,x.notes].join(' ').toLowerCase().includes(q)).slice(0,30);const fs=(state.folders||[]).filter(f=>[f.name,f.notes,f.scope].join(' ').toLowerCase().includes(q));searchResults.innerHTML=(a.length||fs.length)?fs.map(f=>`<div class="card dbl" style="margin:8px 0" onclick="closeModal('searchModal');openFolderView('${f.id}')"><div class="meta">Folder · ${esc(pageMeta[f.scope]?.[0]||f.scope)}</div><div class="card-title">${esc(f.name)}</div></div>`).join('')+a.map(x=>`<div class="card dbl" style="margin:8px 0" onclick="closeModal('searchModal');editItem('${x.id}')"><div class="meta">${esc(x.type)} · ${esc(x.platform||'')}</div><div class="card-title">${esc(x.title)}</div></div>`).join(''):'<div class="empty">No matches.</div>'};document.addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='k'){e.preventDefault();openModal('searchModal');setTimeout(()=>searchInput.focus(),20)}if(e.key==='Escape'){document.querySelectorAll('.modal-backdrop.show').forEach(x=>x.classList.remove('show'));closeSub()}});
+async function exportBackup(){try{const media=await allFiles();state.settings.lastBackupAt=now();save();const payload={app:'Karsinia.Create',version:1,exportedAt:now(),data:state};if(window.JSZip){const zip=new JSZip();zip.file('karsinia-create-data.json',JSON.stringify(payload,null,2));const manifest=[];media.forEach((r,i)=>{const safe=(r.name||'file').replace(/[\\/:*?"<>|]+/g,'_'),path=`media/${String(i+1).padStart(4,'0')}_${r.id}_${safe}`;zip.file(path,r.blob);manifest.push({id:r.id,ownerId:r.ownerId,name:r.name,type:r.type,size:r.size,createdAt:r.createdAt,path})});zip.file('media-manifest.json',JSON.stringify(manifest,null,2));zip.file('RECOVERY-INSTRUCTIONS.txt','KARSINIA.CREATE BACKUP\nRestore from Backups > Restore backup.\nThis ZIP contains data and direct uploads.');const blob=await zip.generateAsync({type:'blob',compression:'DEFLATE',compressionOptions:{level:4}}),u=URL.createObjectURL(blob),a=document.createElement('a');a.href=u;a.download=`karsinia-create-backup-${new Date().toISOString().slice(0,10)}.zip`;a.click();setTimeout(()=>URL.revokeObjectURL(u),3000)}else{const blob=new Blob([JSON.stringify(payload,null,2)],{type:'application/json'}),u=URL.createObjectURL(blob),a=document.createElement('a');a.href=u;a.download='karsinia-create-backup.json';a.click();setTimeout(()=>URL.revokeObjectURL(u),2000)}log('Exported Karsinia.Create backup.');renderPage('backups');toast('Backup downloaded.')}catch(e){console.error(e);toast('Backup failed.')}}window.exportBackup=exportBackup;backupImport.onchange=async e=>{const file=e.target.files?.[0];if(!file)return;try{let payload,media=[];if(file.name.toLowerCase().endsWith('.zip')){const zip=await JSZip.loadAsync(file);payload=JSON.parse(await zip.file('karsinia-create-data.json').async('string'));const mf=zip.file('media-manifest.json');if(mf){for(const m of JSON.parse(await mf.async('string'))){const ent=zip.file(m.path);if(ent)media.push({...m,blob:await ent.async('blob')})}}}else payload=JSON.parse(await file.text());if(payload.app!=='Karsinia.Create'||!payload.data)throw new Error('Invalid');if(!confirm('Restore this Karsinia.Create backup? This replaces current browser data.'))return;state=payload.data;state.settings=state.settings||{};state.folders=state.folders||[];state.items=(state.items||[]).map(x=>({...x,folderId:x.folderId||''}));state.settings.lastRestoreAt=now();await clearFiles();for(const r of media)await putFile({id:r.id,ownerId:r.ownerId,name:r.name,type:r.type,size:r.size,createdAt:r.createdAt,blob:r.blob});state.items.forEach(x=>x.mediaCount=0);media.forEach(r=>{const it=state.items.find(x=>x.id===r.ownerId);if(it)it.mediaCount++});log('Restored Karsinia.Create backup.');goPage('backups');toast('Backup restored.')}catch(err){console.error(err);alert('That is not a valid Karsinia.Create backup.')}e.target.value=''};
+renderPending();renderPage('home');
+</script>
+</body></html>
